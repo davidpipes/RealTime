@@ -13,7 +13,8 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:    
     container_name: realtime-db
@@ -26,6 +27,12 @@ services:
       - ./.containers/realtime-db:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d realtime"]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+  
 
 #  ui:
 #    container_name: realtime-ui
