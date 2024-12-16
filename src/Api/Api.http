@@ -1,0 +1,9 @@
+@Api_HostAddress = https://localhost:51295
+
+POST {{Api_HostAddress}}/echo
+accept: */*
+Content-Type: application/json
+
+BLAHAHHAAH
+
+###
